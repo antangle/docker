@@ -7,7 +7,6 @@ const nodeServerBoot = async () => {
     const port = process.env.PORT || 3000;
 
     //try connecting to database, see if it works
-
     //postgres docker container maps 4321 port into 5432.
     await client.connect()
         .then(() => {

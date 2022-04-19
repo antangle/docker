@@ -1,5 +1,14 @@
 version: "3.7"
 services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: test_db
+    ports: 
+      - '4321:5432'
+
   test_server:
     build:
       context: .
@@ -10,15 +19,6 @@ services:
     volumes:
       - ./:/usr/app
       - /usr/app/node_modules
-
-  db:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: test_db
-    ports: 
-      - '4321:5432'
 
 volumes:
   db:
