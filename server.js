@@ -11,7 +11,7 @@ const nodeServerBoot = async () => {
     await client.connect()
         .then(() => {
             console.log("pg database connected");
-        })
+        })       
         .catch((err) => {
             throw err;
         });
