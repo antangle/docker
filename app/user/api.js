@@ -1,5 +1,5 @@
 const { pool } = require('../config/postgres');
-const { errCatcher } = require('../middleware/errorHandler');
+const { errorCatchMapper } = require('../utils/errorHandler');
 
 const msg = {
     QUERY_FAIL_ERROR: "query failed!"
@@ -29,8 +29,7 @@ const getUser = async (req, res, next) => {
 
 // /test/user/:id
 const getUserById = async (req, res, next) => {
-    const id = parseInt(req.params.id);
-    
+    const id = parseInt(req.params.id);    
     const ret = await pool.query(
         'SELECT * FROM users WHERE id = $1', 
         [id]
@@ -78,10 +77,6 @@ const apis = {
     deleteUser,
 }
 
-const temp = {}
-
-for (const api in apis) {
-    temp[api] = errCatcher(api)
-}
+errorCatchMapper(apis);
 
 module.exports = apis
